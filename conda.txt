@@ -1,0 +1,14 @@
+conda list
+conda upgrade —all
+conda install package_name
+conda remove package_name
+conda create -n env_name list of packages
+conda env list
+conda env remove -n env_name 
+conda list
+condo search search_term
+conda env export > environment.yam 
+conda env create -f environment.yam
+source activate my_env
+source deactivate my_env
+

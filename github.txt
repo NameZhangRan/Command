@@ -1,0 +1,68 @@
+配置SSH 
+$ ssh-keygen -t rsa -C "youremail@example.com"
+查看密钥
+$ cat ~/.ssh/id_rsa.pub
+在GitHub上添加密钥，然后检查连接是否成功
+$ ssh -T git@github.com
+
+$ git remote add origin …
+$ git remote add origin git@github.com:michaelliao/learngit.git
+
+$ git push -u origin master
+由于远程库是空的，我们第一次推送master分支时，加上了-u参数，Git不但会把本地的master分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令。
+$ git push origin master
+
+要克隆一个仓库，首先必须知道仓库的地址，然后使用git clone命令克隆。
+Git支持多种协议，包括https，但通过ssh支持的原生git协议速度最快。
+
+我们创建dev分支，然后切换到dev分支
+$ git checkout -b dev
+用git branch命令查看当前分支
+$ git branch dev
+$ git checkout dev
+
+dev分支的工作完成，我们就可以切换回master分支
+$ git checkout master
+
+我们把dev分支的工作成果合并到master分支上
+$ git merge dev
+
+地删除dev分支
+$ git branch -d dev
+
+查看分支：git branch
+创建分支：git branch <name>
+切换分支：git checkout <name>
+创建+切换分支：git checkout -b <name>
+合并某分支到当前分支：git merge <name>
+删除分支：git branch -d <name>
+
+忽略某些文件时，需要编写.gitignore；
+.gitignore文件本身要放到版本库里，并且可以对.gitignore做版本管理
+
+.gitignore无效及解决办法
+
+对应已经归档到git控制中的文件及目录,在.gitignore忽略会出现无效的情况
+
+##.gitignore介绍 如果想忽略掉某文件或目录,不让这个文件或目录提交到git版本库中,可以通过修改根目录中.gitignore文件(没有这个文件的话,需要手搓创建)来实现.
+.gitignore实例:每行一条实例
+
+#井号开头的这行都是注释 
+*.md #忽略根目录下所有.md后缀的文件
+!README.md #但README.md除外
+dir #忽略根目录dir目录
+dir/ #忽略根目录下的dir/目录下的所有文件
+*/dir #忽略根目录下的dir目录及dir目录下的所有文件
+**/dir 忽略所有目录下的dir目录及dir目录下的所有文件,**表示多级目录,git1.8.2及更高版本才支持
+实例的规则比较简单,同时支持正则表达(~~个人用的不多,就不介绍了~~).
+
+##.gitignore无效场景 在项目开发中,已经添加到git版本中的某些文件(如:xxx.pro.user),需要把这些用户文件移除(忽略掉),按照上面介绍的方式提交后,版本库中并没有生效,
+
+##.gitignore无效解决办法
+
+首先删除本地库缓存(不要忘了修改.gitignore)
+然后再commit和push
+git rm -r --cached . #删除所有缓存
+git add . 
+git commit -m '更新.gitignore'
+git push origin master
