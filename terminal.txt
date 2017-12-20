@@ -1,0 +1,2 @@
+清屏 command + k
+隐藏文件 chflags hidden ~/路径/文件名
