@@ -1,2 +1,3 @@
-清屏 command + k
+清除所有数据 command+k
+清除单个指令 command+L
 隐藏文件 chflags hidden ~/路径/文件名
